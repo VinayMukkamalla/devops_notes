@@ -1,0 +1,97 @@
+same application with domain names instead of ip address              ||practiced entire setup ||
+
+
+nginx used as
+----------------- 
+
+reverse proxy
+
+caching server
+
+load balancer  --> for application load balancer we can use nginx plus
+
+
+
+http {
+    upstream frontend {
+        server frontend-1.vinaymukkamalla.fun;
+        server frontend-2.vinaymukkamalla.fun;
+    }	
+
+--> created two frontend servers and added a load balancer in front @upto  35 mins
+
+
+METHODS AND STATUS CODES
+================================
+GET --> read operation | POST  --> create or write operation
+
+200 201 etc --> Success status code
+
+300 etc  --> success but cached response
+
+400  --> errored --> 404 not found      etc                       /api/transaction/ipaddress
+
+
+500  etc server side error
+
+
+
+@55mins trouble shooting steps
+
+/usr/share/nginx/html  --> application frontend files unzipped here
+
+/etc/nginx/
+
+front end
+/var/log/nginx
+              access.log
+	      error.log
+
+                            tail -f access.log  --> running logs or live logs
+
+
+
+backend  :
+
+/var/log/
+
+	messages   -->  tail -f messages   --> backend logs
+
+
+everytime you change .service file you have to daemon-reload
+
+
+troubleshooting commands:
+================================
+
+systemctl status
+
+ps -ef
+
+netstat
+
+telnet
+
+inspect and check
+
+/var/log/nginx
+
+/var/log/messages
+
+nslookup domainname
+
+curl http://localhost:8080/health
+
+
+
+inode symlink and hardlink   @ 1 :05 hrs   also complete the video from here  ( completed) 
+============================:
+
+ls -li --> gives inode
+
+inode hold the medatadata
+
+start filename  gives metadata  --> ownership size file type permisssions , pointers location memory location in hardware
+
+
+softlink / symlink   --> shortcut

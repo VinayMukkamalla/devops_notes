@@ -1,0 +1,32 @@
+DNS --> domain name system
+
+
+user --> search browser(fb.com) --> browser cache (checks) --> os cache (checks) --> next network(checks) which is ISP(DNS resolver (dns resolvers cache))  --> root servers(handled by root servers)
+
+
+DNS resolver:
+
+A simple software(one of the components) running in isp servers to fetch the ip address for a domain
+
+
+English dictionary --> oxford
+
+ICANN --> Internet corporation for assigned names and numbers  --> non profit organization
+
+formed by popular companies and US government
+
+root servers --> TLD (top level domain)--> domain authourity (aws, google, hostinger, godaddy)
+
+Domain registars --> Godaddy, Hostinger, route 53
+
+without purchasing or having a domain https will nit work 
+
+.com, .in, .uk, .ai, etc
+
+domain purchase godaddy hostinger
+
+give authority to aws @45 mins
+
+vinaymukkamalla.fun
+
+mysql.vinaymukkamalla.fun

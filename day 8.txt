@@ -1,0 +1,198 @@
+router 
+
+home wifi connections
+
+router will provide ip address to all the devices connected to the wifi network
+
+there are two interfaces in a router
+
+public and private or internal or external
+
+whichever device has RAM OS and storage can have an ip address
+
+
+external interface of the router will be connected to the ISP's (jio, airtel etc)
+
+
+to check your wifi router ip address:
+
+open command prompt
+
+give: ipconfig
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Windows IP Configuration
+
+
+Wireless LAN adapter Local Area Connection* 3:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter Local Area Connection* 12:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . :
+   IPv6 Address. . . . . . . . . . . : 2405:201:c408:388b:2004:8014:ec00:9932
+   Temporary IPv6 Address. . . . . . : 2405:201:c408:388b:7d56:6c98:bbab:ace3
+   Link-local IPv6 Address . . . . . : fe80::7052:74fe:ef76:17e4%20
+   IPv4 Address. . . . . . . . . . . : 192.168.29.19     --> internal ip address    (laptop ip address)
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : fe80::670:56ff:fee3:5007%20
+                                       192.168.29.1  --> internal modem ip address  vs public ip : 49.43.224.129
+
+Ethernet adapter Bluetooth Network Connection:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+if you want to communicate with internal devices internal ip address is the best
+
+(nick name VS register names)
+
+when two different servers are in a same data center then it is always good to use internal ip addresses for communication as both of them are internally connected on the same network 
+
+using private ip for internal communication gives speed and is more secure
+when you restart or stop and start a server public ip changes everytime
+
+for internal communication private ip
+
+for external --> public ip
+
+
+------------------------------------------------
+
+
+dependencies or libraries
+==========================
+nodejs -> package.json == build file --> here dependencies will be mentioned by developers, our application will work if we have these dependencies and project name, description, etc.
+java -> pom.xml
+python -> requirements.txt
+.NET -> .sln
+go -> build.go
+
+cat package.json 
+
+to make the code work we have to first download and install the dependencies packages imported while developing
+
+i.e, node package manager
+ npm install --> to install packages related to our application
+
+if we are using this command it expects package.json in the current current folder
+
+without the package.json npm install cannot get the file so it reads from the internet
+
+
+package == library == dependency all are same
+ 
+
+to install a application downloaded from internet
+
+we can directly install using --> dnf install nginx and start --> using systemctl start nginx
+
+but we have to install customized application so we cannot directly install the application using dnf install and start the app using systemctl start app
+
+---------------------------------------------------------
+if custom application, then how to start/stop/restart
+
+we can create systemctl services for custom applications
+
+/etc/systemd/system/<preferred-name>.service
+
+How to start the application, DB configuration details also will be provided
+-------------------------------------------------------
+
+to start a custom application we can create /etc/system/system/<somename>.service
+
+and you can define in this <somename>.service --> to use systemctl by using <somename>
+like 
+** systemctl start someone
+	systemctl enable someone
+	systemctl status someone 
+here we are using someone which is the service name we have created in the /etc/system/system/ path with <someone>.service as we have to run our custom application
+
+
+developer gives the below
+
+-->How to start the application,
+--> dependencies package.json
+ DB configuration details also will be provided
+
+filename= <someone>.service: we are placing the below instructions given by developer in this file created in path /etc/system/system/ to directly use systemctl command
+--------------------------------------------------------------------------------------------------------------------------------------
+[Unit]
+Description = Backend Service
+
+[Service]
+User=expense
+Environment=DB_HOST="<MYSQL-SERVER-IPADDRESS>"  || --> DB configuration  DB_HOST="MySQLserver ip address ivvali" developer provides
+ExecStart=/bin/node /app/index.js  command given by developer to developer -->/bin/node /app/index.js
+SyslogIdentifier=backend
+
+[Install]
+WantedBy=multi-user.target
+----------------------------------------------------------------------------------------
+
+
+now we have setup systemctl for our custom application 
+we can use : 
+
+as we have create the service newly we have to reload daemon
+
+		systemctl daemon-reload
+		
+		systemctl start someone
+        	
+		
+		systemctl enable someone
+        	
+		systemctl status someone 
+
+
+backend applications mostly uses port 8080
+
+
+install programming language  nodejs:20
+
+created one directory /app
+
+downloaded code  /tmp/backend.zip and later unzipped in/app 
+
+installed dependencies  npm install
+
+created systemctl service to start/stop/restart  /etc/systemd/system/backend.service and in backend.service we have pasted the run instructions provided by developers
+
+then make sure DB connections, schemas, tables exsits  -->  mysql -h 172.31.30.95 -uroot -pExpenseApp@1 < /app/schema/backend.sql
+
+
+nginx -> famous webserver and reverse proxy
+===========================================
+
+/usr/share/nginx/html -> default directory where you keep frontend code
+/etc/nginx -> nginx configuration  @ 1: 20 mins
+
+
+inspect --> network --> transaction http://54.83.89.6/api/transaction
+
+================================================================================================================
+
+database:
+
+launch instance and connect to it 
+
+install mysql-server
+
+enable mysqld / start/ status ps -ef / netstat
+
+a default user MySQL will be created and we create 
+
+mysql_secure_installation --set-root-pass 
+

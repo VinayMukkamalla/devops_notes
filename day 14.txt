@@ -1,0 +1,48 @@
+why scripting?
+
+two goals of Automation:
+
+speed 
+
+and accuracy,
+
+consistency(enni sarlu run chesina same results),
+
+scalability(can work for any number of times)
+
+Documentation( what you did in the past is documented)
+
+reusability
+
+scripting used in pl/sql, sql, RPA, lunix 
+
+
+where to store the scripts?
+
+in pc:
+
+crash single point of failure
+
+security
+
+cannot share with others
+
+
+version control
+
+repositories or version control systems to store
+
+
+centralized vs decentralized or distributed version control systems
+=====================================================================
+
+
+system design patterns
+
+centralized:
+
+single point of failure
+
+resources shortage
+
+over traffic

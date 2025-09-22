@@ -1,0 +1,114 @@
+VIM editor 
+
+head
+
+tail
+
+45 mins
+
+user Management
+
+sudo su
+
+current path as root
+
+sudo su -  
+
+/root path as root user
+
+user and group creation
+
+useradd suresh  --> when you create a user in Linux bydefault a group will be created with the username
+groupadd devops
+
+cat /etc/passwd
+suresh:x:1001:1001::/home/suresh:/bin/bash
+
+cat /etc/group  --> A user in Linux must have atleast 1 primary group and 1 secondary group
+suresh:x:1001:
+devops:x:1002:
+
+
+password(encrypted)
+
+cat /etc/shadow
+
+ec2-user:!!:20342:0:99999:7:::
+suresh:!!:20342:0:99999:7:::
+
+
+usermod -g <groupname> <username>
+
+id suresh
+ gid=1001(suresh) groups=1001(suresh)
+usermod -g devops suresh
+id suresh
+gid=1002(devops) groups=1002(devops)
+
+secondary group is used to give access to other teams temporarily
+
+allow users to login using password 
+
+vim /etc/ssh/sshd_config  --> :/PasswordAuthentication  no --> yes
+
+sshd -t to check after changing as the above file is very important
+
+ systemctl restart sshd   -->  restart to reflect changes
+
+as we have given access to suresh to login to server through username and password he can login
+
+by using ssh suresh@ipaddress
+
+last -->  to check whoever logged in
+
+remove user from group --> gpasswd -d suresh operations
+
+gpasswd -d suresh operations
+
+
+       useradd suresh
+   10  groupadd devops
+   11  id suresh
+   12  cat /etc/passwd/
+   13  cat /etc/passwd
+   14  cat /etc/group
+   15  cat /etc/shadow
+   16  clear
+   17  id suresh
+   18  usermod -g devops suresh
+   19  id suresh
+   20  history
+   21  pwd
+   22  sudo su -
+   23  who
+   24  groupadd operations
+   25  cat /etc/group
+   26  usemod -aG operations suresh
+   27  usermod -aG operations suresh
+   28  id suresh
+   29  passwd suresh
+   30  vim /etc/ssh/sshd_config
+   31  sshd -t
+   32  history
+   33  systemctl restart sshd
+   34  exit
+   35  pwd
+   36  sudo su -
+   37  exit
+   38  gpasswd -d suresh devops
+   39  id suresh
+   40  gpasswd -d suresh operations
+   41  id suresh
+
+
+
+file permissions
+
+
+@1:26 mins
+
+download diagram and draw.io and existing diagram
+
+
+
+

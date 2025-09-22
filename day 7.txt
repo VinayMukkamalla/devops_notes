@@ -1,0 +1,361 @@
+ps -ef
+
+top
+
+kill PID
+
+kill -9 PID
+
+netstat -lntp --> shows the ports opened and PID
+
+Database --> application --> web application --> load balancer --> dns(protocol://ipaddress:port number) -->browser--> (amazon.com)user
+
+
+
+CRUD
+==========
+
+create
+ 
+Read
+
+Update
+
+Delete
+
+
+AMI --> amazon machine image --> devops practice (our custom AMI)
+
+What is AMI?
+=============
+Image --> image is everything around us in a picture along with us
+Amazon image --> Image is OS + some required software
+
+Image is providing a hardware pre installed Softwares OS and some pre installed applications like MacFee, msword, msppt, etc 
+
+
+Linux 
+----------------------------------------------------------------------------
+
+Linux is OS or Kernel?
+=======================
+Linus Torwalds -> Linux and Git
+
+Mac -> Hardware + MacOS
+Dell -> Hardware + OS(Optional) -> we have freedom to install any OS
+
+dominating OS for servers was Unix
+Unix -> Hardware+UnixOS
+
+He completely developed a Kernel from the scratch using C language. 
+
+Kernel = a component that connects with Hardware
+OS = Kernel + some utilities or applications for user
+
+Centos, Fedora, Ubuntu, Android, Oracle Suse, Redhat
+
+--------------------------------------------------------------------------------
+Redhat Family
+==============
+Opensource vs Enterprise
+
+Opensource -> free and community driven. we need to wait for fix
+Enterprise -> We pay money for support. if there are defects immidiately we get help
+
+Enterprise = Opensource + Support
+
+Redhat = Kernel + Application Utilities + Support
+
+Amazon Linux == Redhat == Centos == Fedora == Almalinux consider all same
+
+devops-practice = RHEL based
+devops AMI use below credentials
+username=ec2-user 
+Password=DevOps321
+--------------------------------------------------------------------------------------
+different flavous
+
+opensource VS enterprise
+
+Red hat enterprise 
+
+redhat ==> Linux kernel +app utilities + support
+
+Amazon-Linux --> Redhat Linux
+
+=====================================================================================================================================================
+devops-practice = RHEL based
+devops AMI use below credentials
+username=ec2-user 
+Password=DevOps321
+
+this devops-practice AMI is developed by joindevops shiva 
+this AMI if we use while launching instance 
+it will allow user to connect without keys 
+
+ssh ec2-user@ipbaddress
+
+password : DevOps321
+
+it will show public ip | private ip| instance type(t3.micro)
+some added colors  --> enabled some colors and packages
+
+it by default takes 20gb hard disk (this is concerning as it may consume more resources and can be charged more)
+
+
+@37 mins
+
+expense documentation diagram
+
+user --> captain --> waiter --> chef --> raw-materials
+
+user --> load balancer --> web --> application --> Database
+
+
+Database: @ 40 mins
+
+Database = BOX == server == Node 
+Database server is a physical server
+
+we install a server and we install database related application(software) on the server
+
+two types of database servers
+
+relational and Non relational Databases
+
+RDBMS --> Relational database management system: to store and manage data in a rows and columns tabular format(tables)
+EXCEL --> to store data and organize data --> rows and columns (sheets)
+
+
+RDBMS softwares like : MySQL, oraclesql
+
+we use MySQL-server
+
+so in the instance we launched we change it's name to database and also install mysql-server on it
+
+sudo su -
+
+how to install app?
+--------------------
+use:
+dnf install mysql-server -y
+
+after installing we should start the server
+how to start the server?
+-------------------------
+use:
+
+systemctl start mysqld   -->(d refers to deamon it will run continuously without needing a restart for years @47mins)
+
+How to check the status of application?
+-------------------------------------
+use:
+
+systemctl status mysqld
+
+--> active and runing
+
+we can enable the MySQL server to make it automatically run after a restart
+
+how to enable the mysql-server to run automatically after restart?
+------------------------------------------------------------------
+
+dnf enable mysqld
+
+
+how to confirm if it is running?
+---------------------------------------
+use:
+
+ps -ef| grep mysqld  --> it will list the processes
+
+how to check if ports are opened for mysqld?
+-------------------------------------------- @49mins
+use:
+
+netstat -lntp    --> it will list tcp protocols and you can find port number and service name if ports are opened for the service
+
+MySQL port number --> 3306
+
+default admin user for MySQL server is "root"
+
+we have to set a root password for the user 
+
+how do we set password for root user in MySQL server?
+
+use:
+
+mysql_secure_installation --set-root-pass ExpenseApp@1(password)
+
+now installation of MySQL -server and default user is root and we have set root password to ExpenseApp@1
+
+now we have to connect to the mysqlserver
+
+how to connect to MySQL server?
+=============================
+
+
+To connect to any other system 
+
+we need the below:
+
+IP, port, protocol,&& username & password || key
+
+
+for example:
+
+if we want to connect to facebook serve
+
+we should use the below
+
+to connect remotely:
+---------------------
+
+https --> protocol
+
+ipaddress:/facebook.com(here we pass this /facebook.com and dns will convert to ip address)
+
+username and password:
+
+port: 443(it will take automatically)
+
+
+we are in windows ad we have connected remotely to a database server(using remote login) in which we installed database server 
+
+AS we installed MySQL server within in server we don't need ip address to connect to the MySQL if we are logged in to the server already
+
+how to connect to MySQL server remotely?:
+--------------------------------------------
+
+to connect remotely -->
+
+ use:  mysql -h <host-address> -u root -p<password>
+
+how to connect to MySQL server locally?:
+---------------------------------------
+
+to connect locally if we are in the server where MySQL is installed and running -->
+
+ use:  mysql -u root -p<password>
+
+no space between -p and password (ex: -pExpenseApp@1)
+
+so mysql -u root -pExpesnseApp@1 or use : mysql
+
+diagram @ 55mins
+
+Database Linux Server -> Database Server Installation -> Schema/databases -> tables -> Data
+
+@1hr
+
+as we have now connected to mysql db we have to use mysql language to communicate
+
+show databases; --> will show databases available
+
+
+use dbname; -->   cursor moves to dbname
+
+
+show tables; -->  cursor moves to table
+
+you can now use mysql queries communicate with mysql db and fetches data in the form of records rows and cols joins etc..
+
+
+APPLICATION SERVER (application  server):
+===================================
+
+database server setup installation is ready now we launch another server and deploy our application in the server  
+
+
+backend/app tier:
+
+which language and which version to use for app development is developer decison (Java 1.8, pthon 3.2.4, node js)
+
+launch an instance 
+
+@1hr 9mins Mobaxterm(tabbed SSH client)
+click on session 
+
+click on ssh
+
+give ip address + ok
+
+give username and password and login to server
+
+dnf module disable nodejs -y --> disabling default nodejs version 
+
+dnf module enable nodejs:20 -y --> enable especially node js 20 (version 20)
+
+now if we install nodejs it will auto install version 20
+
+dnf install nodejs -y
+
+//we installed nodejs to run nodejs code as the application is developed using nodejs language and nodejs -> is Runtime, like jre for java
+
+
+
+Add Application user:
+====================================
+
+ps -ef| grep mysql
+
+who is running mysql? --> mysql
+ 
+is mysql a human user or non human user? -->  non human user or system user  | system account/ service account
+
+to avoid dependency on humans and to secure access  --> to avoid security vulnerabilities by loosing login credentials.
+
+
+system account/ service account  -> non human users --> will not have passwords --> used to run applications
+
+
+so we use system user called Expense to access our application with non human user
+
+useradd Expense   --> creates our system user i.e Expense --> sys user name
+
+
+create folder for application:
+=============================
+
+mkdir /app    --> to store application code by downloading
+
+
+curl-o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+
+we are downloading by using curl -o path-to-store  URL
+
+we are temporarily storing data in /tmp folder in a new file called backend.zip file
+
+we can use wget to download but we have to be in the path it downloads in current path(my assumption)//  whereas curl URL displays the content in a file 
+
+/tmp --> temporary we will download into temp folder and then modify the data and then move to or required destination path
+
+
+cd /app  --> now moving to /app folder to store our application code which we downloaded in /tmp/backend.zip from internet(s3)using URL -> https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+
+unzip /tmp/backend.zip 
+
+developer responsibilities VS Devops responsibilities:
+=======================================================
+
+deciding coding language and version of language is architectural decision and developers will give us the version
+
+we have install runtime ,
+
+download application and dependencies to /tmp ,
+
+then we have to create /app ->(a location to store application code)
+
+and unzip dependencies(ZIP file) in the /app dir to store the code  
+
+
+
+
+
+
+		
+
+
+
+
+

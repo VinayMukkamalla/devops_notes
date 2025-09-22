@@ -1,0 +1,263 @@
+Roboshop Project:
+Mongo DB used to store Nosql database
+
+key value pairs -->  file called document
+
+upto security group allow all @16mins 
+
+/etc/yum.repos.d  --> default repository  create custom repo file /etc/yum.repos.d/mongo.repo 
+
+[mongodb-org-7.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/
+enabled=1
+gpgcheck=0
+
+
+dnf install mongo-org -y   // install mongodb server
+
+netstat -lntp        // port 27017 mongoDB port
+
+by default security  127.0.0.1:27017  security restricts access to other than local host
+
+so we allow access from internet by modifying /etc/mongod.conf
+
+vim /etc/mongod.conf
+
+net:  
+	port: 27017
+	bindIp: 127.0.0.1    --> 0.0.0.0
+
+practiced:
+    1  17/09/25 07:49:16 vim /etc/yum.repos.d/mongo.repo
+    2  17/09/25 07:50:28 dnf install mongodb-org -y
+    3  17/09/25 07:51:50 systemctl enable mongod
+    4  17/09/25 07:52:02 systemctl start mongod
+    5  17/09/25 07:52:15 systemctl status mongod
+    6  17/09/25 07:52:29 netstat -lntp
+    7  17/09/25 07:52:49 vim /etc/mongod.conf
+    8  17/09/25 07:54:09 systemctl restart mongod
+    9  17/09/25 07:54:15 netstat -lntp
+
+--------------------------------------------------------------------
+
+
+@24 mins 30sec catalogue:
+==========================
+
+
+dnf module disable nodejs -y
+
+dnf module enable nodejs:20 -y
+
+dnf install nodejs -y
+
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop syetem user" roboshop
+
+to run the service (application which is catalogue) we create system service file
+
+/etc/system/system/catalogue.service   -> vim create and open catalogue.service
+
+[Unit]
+Description = Catalogue Service
+
+[Service]
+User=roboshop
+Environment=MONGO=true
+// highlight-start
+Environment=MONGO_URL="mongodb://<MONGODB-SERVER-IPADDRESS>:27017/catalogue"
+// highlight-end
+ExecStart=/bin/node /app/server.js
+SyslogIdentifier=catalogue
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+nslookup domain name --> to check if dns is updated with ip address
+
+
+systemctl daemon-reload
+
+systemctl start catalogue
+
+systemctl enable catalogue
+
+systemctl status catalogue
+
+now we have to install mongodb-mongosh which is client package in backend server and then connect to mongdb-org which is server 
+
+we don't have mongodb in our repository
+
+/etc/yum.repos.d/
+
+so we create /etc/repos.d/mongo.repo and the pate the below configuration in the repo and then install mongodb client mongosh
+
+[mongodb-org-7.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/
+enabled=1
+gpgcheck=0
+
+dnf install mongodb-mongosh -y
+
+now we have installed client 
+
+now we establish a connection to the mongo-org and run default scripts given by developer we have in /app/db/master-data.js
+
+mongosh --host (host in which mongo-org is running)serverdns/serveripaddress < /app/db/master-data.js
+
+now we connect to mongo-org from mongodb-mongosh
+
+mongosh --host dns(mongo-org ip address)
+
+show dbs
+
+    1  17/09/25 07:56:14 dnf module disable nodejs -y
+    2  17/09/25 07:57:26 dnf module enable nodejs:20 -y
+    3  17/09/25 07:57:41 dnf install nodejs -y
+    4  17/09/25 07:58:01 mkdir /app
+    5  17/09/25 07:59:08 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+    6  17/09/25 07:59:16 cd /app
+    7  17/09/25 07:59:26 unzip /tmp/catalogue.zip
+    8  17/09/25 07:59:31 ls
+    9  17/09/25 07:59:38 npm install
+   10  17/09/25 08:00:14 ls
+   11  17/09/25 08:01:49 useradd --system --home /app --shell /sbin/nologin --comment" roboshop system user " roboshop
+   12  17/09/25 08:02:45 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+   13  17/09/25 08:03:47 ls -l /home/
+   14  17/09/25 08:03:59 ls
+   15  17/09/25 08:04:12 cd ..
+   16  17/09/25 08:04:14 ls
+   17  17/09/25 08:04:29 ls -l sbin/
+   18  17/09/25 08:05:10 ls -l sbin/newusers
+   19  17/09/25 08:05:27 cat sbin/newusers
+   20  17/09/25 08:06:06 clear
+   21  17/09/25 08:06:16 history
+   22  17/09/25 08:06:43 history -d 20
+   23  17/09/25 08:06:47 history
+   24  17/09/25 08:08:15 vim /etc/yum.repos.d/mongo.repo
+   25  17/09/25 08:09:54 vim /etc/systemd/system/catalogue.service
+   26  17/09/25 08:15:07 systemctl start catalogue
+   27  17/09/25 08:15:21 systemctl enable catalogue
+   28  17/09/25 08:15:32 systemctl status catalogue
+   29  17/09/25 08:15:52 ps -ef | grep catalogue
+   30  17/09/25 08:16:14 netstat -lntp
+   31  17/09/25 08:17:36 systemctl daemon-reload
+   32  17/09/25 08:17:44 systemctl status catalogue
+   33  17/09/25 08:18:06 systemctl restart catalogue
+   34  17/09/25 08:18:11 systemctl daemon-reload
+   35  17/09/25 08:18:18 systemctl status catalogue
+   36  17/09/25 08:19:07 dnf install mongodb-mongosh -y
+   37  17/09/25 08:20:21 ps -ef | grep mongo
+   38  17/09/25 08:20:35 netstat -lntp
+   39  17/09/25 08:21:24 telnet mongodb.vinaymukkamalla.fun 27017
+   40  17/09/25 08:22:38 mongosh -h mongodb.vinaymukkamalla.fun < /app/db/master-data.js
+   41  17/09/25 08:23:22 mongosh --host mongodb.vinaymukkamalla.fun < /app/db/master-data.js
+   42  17/09/25 08:23:56 mongosh --host mongodb.vinaymukkamalla.fun
+   43  17/09/25 08:27:00 history
+==========================================================================================================================================
+
+
+frontend:
+==========
+
+
+etc/nginx/nginx.conf
+
+etc/nginx/default.d/expense.condf
+
+
+
+==============================================================================================================================
+
+
+Redis in memory database
+
+
+if you have some information in you hard disk in local OS will take the data or info from HD and push to RAM so that we can access
+
+
+disk(HD(image in local)) --> (image pushed to RAm)RAM  --> APP{gallery application etc} (running on RAM can access image) can access
+
+
+if RAM is low then we cannot access applications fast
+
+
+Redis is cache
+
+cache is for speed
+
+
+applications(our custom app that runs on backend) generally gets information from databases.
+
+
+everytime establish a connection to database and query and close connection after query is completed  --> is timetaking and difficult process
+
+so applications check cache first and then goes to database if information is not available and then stores in cache again and stores in cache and then displays to user
+
+
+app --> cache --> database --> store in cache --> display to user 
+
+cache is like PA to Application      -->{CM + PA   ||  Person(newAPIrequest) --> (cache)PA --> (database)CM}   @56mins
+
+
+Resis is important database generally in our applicatios to access our applications faster by keeping databases in cache and apps access the data fast
+
+
+
+why to create these many servers?
+
+to keep one component in one server  (disturb avvakunda undataniki) @ 1hr :02 mins
+
+anni servers same server lo install chetsthe same time to same port (service) rendu different machines(components) access(same server ni same time lo) cheyyalevu 
+
+oka component oka server ni 8080 port tho connect ayyindhi ante ah port	ah server ki block aipotundhi and inkoka component ah server ni same 8080 port tho connect avvaledhu 	
+
+one server in one component makes maintenance easy
+
+
+practiced user and redis 
+
+user needs both redis and mongodb
+
+
+cart needs catalogue and redis
+
+all done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------
+
+launch an instance 
+
+install mongodb -org   //port 27017
+
+start and enable 
+
+netstat -lntp
+
+/etc/mongod.conf
+
+-------> bind ip change from  local to internet 0.0.0.0  
+
+systemctl restart
+
+
+useradd --system --home /app --shell /sbin/nologin --comment"roboshop system user" roboshop
+
+

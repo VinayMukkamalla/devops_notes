@@ -1,0 +1,128 @@
+infra setup and configuratuin
+
+nodejs programming language
+
+upto cart service setup in aws     @ 18 mis
+
+
+
+
+===========================================================
+
+shipping component developed using java language   @ 29 mins
+
+
+what is groupID and artifactID:
+
+groupID and artifactID are parameters used to uniquely identify the project and components  @ 55: 35
+
+
+nodejs dependencies --> npm repository
+
+maven repository --> maven repository
+
+npm --> glob only one name globally -->  names once used cannot be taken by another person again
+
+maven --> you can use same names using small differentiation using groupID artifatcID and version  --> if not mentioning version means take the latest version
+
+
+maven central repository
+
+
+
+maven lifecycle:
+====================
+
+start to end
+
+mvn compile  --> compiles cource code into bytecode  (source file or sources untenry compile avtadhi)
+
+test --> runs test cases (unit tests) written by developers
+
+starting from validating the code to till deployment of application onto the server / maven central  {we may be send dependencies that we use as part of our application to maven but not application code which is client's property}
+
+mvn validate --> checks whether your pom.xml is in proper structure or not and downloads dependencies 
+
+mvn compile  --> compiles all java source files and creates a target directory in current path
+
+
+if our developers made any mistakes in source code then build fails before build compilation also fails
+
+
+mvn test -->  runs test cases if developers write any test cases
+
+mvn package  --> successfully compile and package into a file  -->  .jar file  --> java archieve 
+
+packaging formats -->  .jar .war .ear   
+
+package == validate + compile + ec2-user  DevOps321            
+ 
+
+build --> 
+
+package
+
+install 
+
+deply
+
+
+npm build tool
+
+
+java programming language
+
+maven build tool
+increase quota of instances in AWS
+
+pom.xml file
+
+groupID 
+
+artifactID
+
+Amazon.in+cart+version
+
+GroupID +ArtifactID + version
+
+maven
+
+GroupID : in.amazon
+Artifat
+
+
+MVN cleanpackage
+
+maven lifecycle
+====================
+
+compile 
+test
+
+staring from validating the code to deploying onto server or maven central
+
+mvn validate
+mvn complile(command) --> target folder
+
+mvn test
+
+mvn package --> successfully compile and package into a file
+
+
+os installation --> .iso or .exe is not a single file it is a packaged file inside the package there are multiple files
+
+
+
+war ear legacy
+
+microservices jar
+
+pkg = val + compile +test + package(by default all run impicitly)
+
+mvn clean ==> in pom.xml /app location  cleans old build and compile files
+
+mvn clean package
+
+
+pom.xml written by developers
+

@@ -1,0 +1,35 @@
+    1  wget https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-03.txt
+    2  ls
+    3  curl https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-03.txt
+    4  curl https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt
+    5  wget https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt
+    6  echo "https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt |cut -d "/" -f1
+    7  echo "https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt | cut -d "/" -f1
+    8  echo "https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt | cut -d "/" -f
+    9  echo "https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt | cut -d "/" -f1
+
+
+   10  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| cut -d "/" -f1
+   11  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| cut -d "/" -f2
+   12  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| cut -d "/" -f3
+   13  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| cut -d "/" -f4
+   14  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| cut -d "/" -f6
+   15  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| awk -F "/" {print NF}
+   16  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| awk -F "/" '{print NF}'
+   17  echo " https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-09.txt "| awk -F "/" '{print $NF}'
+
+all commands upto sudo su
+
+cd 20  ls
+   21  cat passwd | awk -F ":" '{print $1F}'
+   22  cat passwd | awk -F ":" '{print $1F $NF}'
+   23  cat passwd | awk -F ":" '{print $1F $3F}'
+   24  sudo su
+   25  cat passwd | awk -F ":" '{print $1F, $3F}'
+   26  cd /var/log   ---> will have logs 
+to check live logs we check using head and tail commands
+@ 1:20 mins class after that Q&A
+   27  ls
+   28  ls -l
+   29  hisytory
+   30  history

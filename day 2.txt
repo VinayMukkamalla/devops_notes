@@ -1,0 +1,30 @@
+client server architecture
+firewall
+
+
+create keypairs in daws-86 
+key pairs and import public key in aws
+import
+name daws-86s
+
+create custom security group(firewall)
+create secgrp
+name allow-ssh
+desc allow-ssh
+
+inbound 
+protocol ssh
+port no 22
+anywhere 0.0.0.0/0
+desc allowing SSH on port 22 from all computers
+
+connect to ec2 instance using SSH
+
+details
+public ipv4 copy
+
+keep in mind
+
+ssh-keygen -f daws-86
+
+ssh -i <privatekey> ec2-user@ipaddress 

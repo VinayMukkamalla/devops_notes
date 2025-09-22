@@ -1,0 +1,264 @@
+upto 15 mins chmod and  chown
+
+useradd suresh
+groupadd devops
+
+usermod -g devops suresh
+
+sudo su
+
+chown suresh:devops devops.txt
+
+
+@16 mins diagram about ssh
+ 
+how a user can login using keys
+
+create ssh keys in user local 
+
+ssh-keygen -f Sivakumar
+
+Sivakumar
+Sivakumar.pub
+
+cat Sivakumar.pub
+ --> pubkey code ed
+
+ec2-user hidden files and directories
+
+ls -la /home/ec2-user/
+
+.ssh  folder
+authorized_keys file -->  public key will be inside this file Sivakumar.pub
+
+also change directory permissions and file permissions and ownership of file and directory as like ec2-user
+
+
+switch to root user
+sudo su -
+
+cd /home/Sivakumar/
+
+mkdir /home/Sivakumar/.ssh/ or mkdir .ssh
+
+cd .ssh/
+
+touch authorized_keys
+
+vim or vi authorized_keys
+
+paste pub_key from Sivakumar.pub
+
+:wq or :wq! come out of file
+
+chmod 600 authorized_keys
+
+come out cd .. one step back
+
+chmod 700 .ssh/
+
+chown -R Sivakumar:Sivakumar .ssh/ --> change dir and files inside dir ownership
+
+now you can connect using 
+
+
+ssh -i Sivakumar Sivakumar@ipadress        @30 mins
+
+to get sudo priviledges 
+
+add to wheel group and 
+
+in /etc/sudoers  visudo or vimsudo will also be used to edit the same file by checking syntax 
+
+uncomment allow wheel to run all commands without password by uncommenting
+
+upto @ 45mins
+
+
+started ports @ 45 mins 30 sec
+-----------------------------------
+
+services and ports:
+a system has 0- 65535 ports
+
+ssh is a service name and port number 22 
+
+what is a port
+
+@diagram of server and services and ports 
+
+many services will run on a server like https, http, smtp, ftp ..etc.
+
+https://www.facebook.com
+
+users understand names            -->   SSH, HTTPS
+
+protocol developers will develop protocols
+
+systems(servers, computers) will understand numbers -->  22, 443  
+
+Linux will allocate ports to services one for each
+
+manam oka server ki connect ayyetappude ye protocol tho connect avuthunnam and ah port lo ey service run avtundhi and if ah service ah port lo run avvakapothe manam ah service ki connect avvalemu
+
+
+whenever you try to connect to another system from your system you should follow set of rules called protocol which are defined in respective services of protocol running on that machine like https  (protocol)
+
+people who develop protocols are called protocol developers they develop protocols using languages like c
+
+@53 mins
+
+package managers:
+------------------ 
+
+to install an application in windows
+
+we browse the application and download and install using GUI
+
+in Linux 
+
+for windows patches & updates whenever we click on install latest updates then windows will connect to some windows (URL)websites in background and download some packages and install them in you laptops or systems or machine.
+
+package managers 
+
+like in windows in Linux to install and remove packages we have package managers.
+
+dnf is the command to install/remove packages from the server
+
+syntax:
+previously yum after 2023 it's dnf for Redhat based RHEL(red hat enterprise linux)
+ubuntu (apt get) command --> no business support
+
+dnf install <package name> -y
+
+to install some packages there should be a location where different packages are available
+
+in Linux packages are available in the below location
+
+/etc/yum.repos.d --> will have all the packages(URL's will be available and in background using the urls it will fetch and download the required packages and install)
+
+sudo su -
+
+cd /etc/yum.repos.d   --> this store is like Microsoft store google play store in Linux
+
+dnf list available  --> to check all available packages not installed but available in repos
+
+dnf list installed --> to check installed packages in server
+
+dnf search package  -->  to search
+
+
+dnf install nginx -y
+
+to update 
+dnf update nginx -y
+
+dnf info nginx 
+
+to deploy websites we use nginx in our project
+
+
+service Management :  @ 1:05mins
+-------------------------------
+
+you have installed the packages but are they running?
+
+to access some application or packages after installing them some background services related to the application should be running. 
+
+
+if a service is not running then we cannot connect to the server
+
+service management:
+to start, stop(remove), check whether a service is running on not.
+
+command:
+
+systemctl 
+
+syntax:
+systemctl start nginx
+
+systemctl status nginx (to check whether service is running or not)
+
+systemctl enable nginx --> whenever system is restarted this nginx will run automatically
+                            some applications or processes will automatically run like(edge etc opening after restart)
+
+systemctl disable nginx --> to disable the enable feature 
+
+if a service is running then you should be able the service using its service name and port number
+
+for example:
+
+http service is running on nginx so you should be able to access http service through browser
+
+like http://ipaddress(public ip):80
+
+here service name http
+     port no: 80 and port no 80 is default port so it will be mostly invisible or hidden even if you use it at the end
+
+     https  --> port 443
+
+it will not allow as we have allowed only ssh port 20 in our security group(firewall)
+
+so go to instance --> go to security group  --> edit inbound rules --> add rule ->  allow http and from anywhere (0.0.0.0/0 --> internet) 
+
+now the internet will be able to access our applications if we deploy on the nginx
+
+http://ipaddress(public ip):80
+
+assalu system lo enni services run avtunnayo chudali ante
+
+systemctl --help  --> to view options available in systemctl command
+
+systemctl list-units --type=service --state=running
+
+the services which are in running will be accessible
+
+
+
+
+1hour 5 minutes 
+in daily life we do
+package management
+service management
+
+
+dnf install nginx -y 
+
+systemctl start nginx 
+
+systemctl status nginx
+
+http : port 80 default so browser don't show port 80 at last
+
+https : port 443
+
+SSH : port 22
+
+nginx up and running
+
+systemctl stop nginx
+
+systemctl restart nginx
+
+
+systemctl enable nginx --> whenever system restarted automatically nginx will run
+
+systemctl disable nginx 
+
+systemctl --help
+
+systemctl list-units
+
+systemctl list-units --type=service --state=running --> gives current running services
+
+daemon --> runs continuously without a restart 
+
+upto 1:26 hrs class after that Q&A
+
+
+
+
+
+@1hr:35mins whoever imagines technology will become expert
+  

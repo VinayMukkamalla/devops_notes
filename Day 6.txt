@@ -1,0 +1,220 @@
+process management:
+--------------------
+
+Time management 
+
+following a process will only give better results
+
+Team manager
+team lead
+senor engineer
+junior engineer
+trainees
+
+process is always better than persons --> work should not be dependant on a single person
+
+-----------
+
+like process in teams and there are processes in Os (operating system):
+
+in background os will create an pid(process instance id) and run the process
+
+example:
+
+ls -l  --> it will create one process and assign PID and the process pid will run and display result
+
+
+TL --> senior engineer
+
+PPID(Parent process instance ID) -->  PID
+
+
+ps --> lists the process started by current user
+
+
+ps -ef --> lists all the process running in the Linux server 
+
+always use with sudo
+
+dnf install nginx -y
+
+dnf start nginx -y
+
+
+ps -ef| grep nginx   --> to confirm whether nginx processes are running or not
+
+sudo systemctl status nginx  --> will display status of nginx like active | running
+
+
+foreground process & Background process
+
+important processes will run on foreground
+
+nginx process is background process
+
+sleep 10 &  (if you give --> &--> after any command the command will run in background) will create a process instance ID (PID)
+
+nohup similar to &
+
+top --> will list all processes running on the server with --> CPU and RAM <-- consumption
+
+we use (top) command when our system is using too many resources {top works as task manager in windows}  ctrl +c to come out of top
+
+@33 mins 50 sec
+
+what causes a process consume high cpu and high ram (in short high consumption of system resources)
+
+1 High traffic :
+
+number of users accessing or requesting services may have increased
+
+2. problems in application:
+
+increase in the consumption of resources without increase in no of users 
+
+if a task runs it takes CPU and RAM, if the task is completed then it will release resources(CPU & RAM)
+
+sometimes applications will not release the resources
+
+then we have to fix the application
+
+if there is continuous increase in consumption there is a risk of business going down
+
+so solution 1:
+--------------
+
+will take all logs server logs application logs and the restart the server or application
+
+after restarting the application and bringing business to up 
+
+then troubleshoot by checking logs RCA and take next step actions to avoid in future reoccurrence of the issue.
+
+solution 2:
+----------------
+
+kill the process (pid) if the issue is caused by an unnecessary process is consuming the resources
+
+kill pid
+
+kill -9 pid  --> force kill
+
+
+
+Network Management: @41 mins
+-------------------
+
+AWS is responsible to provide network power etc
+
+troubleshooting commands
+
+check if nginx is running
+
+ps -ef| grep nginx
+
+systemctl status nginx
+
+http://ipaddress:80
+
+netstat   {to check tcp}
+
+netstat -lntp
+l  --> list
+n  --> displays port number { http --> 80}
+p -->  displays process id (pid) --> needs sudo priviledges
+t  -->  tcp related
+
+how do you check whether a port is running or not ?  --> netstat -lntp
+
+
+Linux hierarchy
+softlink hardlink, inode 
+forward proxy vs reverse proxy
+
+
+
+3 tier architecture: @47 mins
+==============================
+
+Desktop vs web based applications
+
+Desktop application:
+
+
+web app:
+
+
+examples:
+
+punugula bandi:
+
+(one person maagemant)
+
+
+hotel:
+
+owner issues tokens
+
+cook cooks the order and devlivers
+
+restaurant:
+
+captain: door holder welcomes users
+
+waiter: user management shows users table to sit and takes the order
+
+chef: cooks the order
+
+waiter takes the cooked order and delivers to user
+
+--------------------------------------------------------------
+
+Dosa Batter -> Cooks into Dosa(Chef) -> Waiter delivers the order
+Raw items -> Eatable format(Chef) -> Waiter
+
+Raw format(SQL or NoSQL) -> Application Servers(Java, Python, .NET, NodeJS, Golang) -> Web Servers -> Load Balancer(Captain)
+
+everything in single server is called as 1 tier application
+Database -> Application and Webserver (2 tier)
+Database -> Application Server -> Webserver and Load Balancer (3 tier)
+
+
+
+decoupling or loose coupling
+
+
+Web/Frontend Tier
+=========
+Load Balancing
+Web Server -> nginx -> place web application here
+HTML, CSS and Javascript
+
+Application/Backend/Middleware Server/Tier
+==============
+Java, .NET, Python, C++, Goland, NodeJS
+
+
+CRUD
+=====
+
+Database Tier
+===============
+Storing the data
+
+MySQL
+Oracle
+MSSQL
+Postgress
+
+MongoDB
+Cassandra
+
+Redis
+
+ActiveMQ
+Websphere MQ
+
+@ 1hr:26 mins
+
+
+
+ 

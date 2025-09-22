@@ -1,0 +1,115 @@
+mvn validate  =
+
+mvn compile  = validate + compile + download all dependencies
+
+mvn test
+
+mvn package
+
+mvn clean 
+
+mvn clean package
+
+RabbitMQ
+==============
+
+asynchronous vs synchronous:
+===============================
+
+MQ --> message Queue
+
+synchronous : expects response immediately and shows error if response not received(laptop expecting a response for an http request)
+
+Asynchronous : fire and forget will send a message and forget (sending whatsapp message to a person who is currently offline it will reach him when he is available until it stores the message somewhere like rabbitmq)
+
+
+producer(sender) --> consumer(receiver)
+
+producer --> mq database(broker) --> consumer 
+
+if consumer is online it will listen to MQ database and it will receive the information(message)
+
+if the consumer in not online then the message waits in the storage (mQ databse)
+
+MQ use cases:
+=============
+
+Decoupling of systems
+
+tight coupling : if one system is down other systems dependant on the the system will also be down
+
+loose coupling: system A sends a message to system B when it is down then the message is stored somewhere and it is sent to system B when it is online
+
+
+Relibility:
+==============
+
+messages are stored until they are delivered
+
+Scalability:
+=============
+we can send many requests at a time and messages are delivered in a queue
+
+
+bank transfers within india ---> displays result immediately whether transaction failed or successfull  --> sysnchronous
+
+
+point to point --> queue  --> {producer to one consumer}  [sending a message to queue]
+
+publish and subscribe --> topic{ producer to many consumers}  [sending a message to a topic and all the people who are subscribed will receive the message]
+
+upto @36 mins theory but important so cover once finished practicing 
+
+
+ActiveMQ
+
+RabbitMQ
+
+IBMMQ
+
+kafkaMQ  -> handles huge data like Netflix etc
+
+=============================================================================================
+
+Payment
+==========
+python files -> .py
+build tool -> pip
+build file -> requirements.txt(dependency information)
+
+10th class results link --> AP/TG gov
+
+AP/TG API Link
+
+hall ticket --> respond with results
+
+Manual Process
+=================
+1. too much time
+2. repeated same process
+3. too many errors
+4. tough to troubleshoot
+5. continous network connection
+
+create server
+configuring the server
+	install programming language
+	create system user
+	create directory
+		download the code
+		unzip the code
+		install dependency
+	create systemctl service
+		daemon-reload
+		restart the service
+	
+deployment
+===========
+1. remove old code
+2. download new code
+3. restart the service
+
+
+5672 RabbitMQ port   practice done
+
+now just listen class once
