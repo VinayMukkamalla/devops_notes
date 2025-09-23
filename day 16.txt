@@ -36,3 +36,30 @@ $?  --> exit status previous command exit status {0, 1-127}
 
 1-127 -> failure
 
+functions:
+================
+
+functionname(){
+
+
+}
+
+functionname "agr1" agr2 # calling function to reuse a block of code and passing arguments through Command line
+
+
+colors:
+==========
+
+red -->  "\e[m31"
+
+echo -e "this is $red RED COLOUR "
+
+
+
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+
+logs and logging @ 1:02 mins
