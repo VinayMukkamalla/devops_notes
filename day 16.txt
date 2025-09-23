@@ -1,0 +1,12 @@
+variables:
+========================
+
+1. declaring as assigning within the script
+
+2. passing to script through Command line
+
+3. reading from command line using read command
+
+4. environment variables using export ENV="something"
+
+5. special variables ($@, $*, $#, $$(PID),$0(filename), ${11}, $!(previous background running PID), $? (exit status) )
