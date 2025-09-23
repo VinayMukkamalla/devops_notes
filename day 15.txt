@@ -1,0 +1,93 @@
+day 15
+
+passing variables through command line arguments
+
+example: sh file.sh agr1 arg2
+
+-------------------------------------
+
+readig password through command prompt :
+
+echo " enetr your password: "
+
+read -s password  #password enter will be read and stored here securely
+
+
+-----------------------------------------
+
+Enviroment variables:
+---------------------
+
+everything is a process in linux that runs in an enironment process will be alive until it is ended
+
+ec2-user is a process and if we run shell script using ec2-user
+
+shell script is a subprocess of ec2-user process
+
+declare a environment variable:
+
+export CAPITAL=hyderabad
+
+here CAPITAL is an environment variable
+
+you can access environment variables in script also 
+
+#go to home file of the user and look for hidden files ls -la
+
+.bashrc
+
+vim .bashrc  edit and add system variable at last before line
+
+source .bashrc
+
+then everytime a new process starts the environmant variable wll get auto assigned 
+
+-----------------------------------------------------------------
+
+run commands dynamically inside a shell script and get output
+
+like:
+
+script ececution start time
+
+script ececution end time
+
+how much time does the script run {end time - start time }
+
+command :
+
+date --> to get date with timestamp
+
+date +%F  --> to get formatted date
+
+date +%Y 
+
+date +%Y-%m 
+
+date +%Y-%m-%d-%H-%M-%S { here -(hyphen) is differentiator optional for formatting}
+
+to get complete date and time in only seconds use
+
+date +%s(small s)
+
+
+any progamming language:
+-----------------------------
+boolean (true or false)
+operators(arithmetic, logical, bitwise,)
+
+variables
+data types
+conditions
+functions
+loops
+error handling
+
+there are no explicit data types in shell script. everything in shell is considered as string..
+
+Name=DevOps
+Name=("Linux" "Shell" "Docker")  #array
+
+0 1 2 3
+index starts from 0
+
