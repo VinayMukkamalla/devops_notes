@@ -10,3 +10,29 @@ variables:
 4. environment variables using export ENV="something"
 
 5. special variables ($@, $*, $#, $$(PID),$0(filename), ${11}, $!(previous background running PID), $? (exit status) )
+
+
+conditions:
+=====================
+
+if [condition]; then
+    statement
+elif[condition]; then
+    statement2
+else
+    statement
+fi 
+
+
+# -gt -eq -lt $($num % 2)
+
+
+exit status:
+===============
+
+$?  --> exit status previous command exit status {0, 1-127}
+
+0 --> success
+
+1-127 -> failure
+
