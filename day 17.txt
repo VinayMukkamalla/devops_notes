@@ -1,0 +1,179 @@
+create IAM user with a name to access aws account using CLI and give administration job function access
+
+and in security create access key and secret access key and 
+
+come to command line 
+
+aws configure 
+
+give access key id
+
+secret access key id
+
+default aws region: us-east-1 (for north virginia region)
+
+keep default just enter
+
+aws ec2 run-instances --image-id ami-0abcdef1234567890 --instance-type t2.micro --count 1 --key-name MyKeyPair  --security-group-ids sg-0abcdef1234567890 --subnet-id subnet-0abcdef1234567890 
+--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TEST}]'
+
+took above from internet and made the below
+
+1. creates instance with name TEST and with below specifications 
+aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro   --security-group-ids sg-04097b4e3c38bb38c --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TEST}]'
+
+
+1. creates instance with name TEST with below specifications and gives instance id as output
+aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro   --security-group-ids sg-04097b4e3c38bb38c --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=TEST}]' --query 'Instances[0].InstanceId' --output text
+
+
+search: aws cli to get public ip with instance id
+
+aws ec2 describe-instances --instance-ids i-xxxxxxxxxxxxxxxxx --query 'Reservations[*].Instances[*].PublicIpAddress' --output text
+
+update wanted fields
+
+aws ec2 describe-instances --instance-ids i-06aaf89f987ae9277 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text  |to get public ip of instance [0] |
+
+
+aws ec2 describe-instances --instance-ids i-06aaf89f987ae9277 --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text  | to get private ip of instance [0] |
+
+
+aws cli create r53 record in shell
+====================================
+
+aws route53 list-hosted-zones  ->will list your hosted zones if used in cli
+---------------------------
+{
+    "HostedZones": [
+        {
+            "Id": "/hostedzone/Z07155921YL2PZLNGBCDC",
+            "Name": "vinaymukkamalla.fun.",
+            "CallerReference": "bd53929e-4085-48a3-ae36-5b2500e6bfaf",
+            "Config": {
+                "Comment": "",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 2
+        }
+    ]
+}
+------------------------------------------
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id ZXXXXXXXXXX \
+  --change-batch file://record_changes.json   by using json file 
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id ZXXXXXXXXXX \
+  --change-batch '{"Changes":[{"Action":"CREATE","ResourceRecordSet":{"Name":"blog.example.com.","Type":"CNAME","TTL":300,"ResourceRecords":[{"Value":"example.com."}]}}]}'  by directly passing
+
+from stack overflow
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id 1234567890ABC \
+  --change-batch '
+  {
+    "Comment": "Testing creating a record set"
+    ,"Changes": [{
+      "Action"              : "CREATE"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'" $ENV "'.company.com"
+        ,"Type"             : "CNAME"
+        ,"TTL"              : 120
+        ,"ResourceRecords"  : [{
+            "Value"         : "'" $DNS "'"
+        }]
+      }
+    }]
+  }
+  '
+update details below
+----------------------------------
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id 1234567890ABC \
+  --change-batch '
+  {
+    "Comment": "Testing creating a record set"
+    ,"Changes": [{
+      "Action"              : "CREATE"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'" $ENV "'.company.com"
+        ,"Type"             : "CNAME"
+        ,"TTL"              : 120
+        ,"ResourceRecords"  : [{
+            "Value"         : "'" $DNS "'"
+        }]
+      }
+    }]
+  }
+  '
+------------------------------------
+
+
+
+==============================================================================================================
+Error Handling
+==============
+1. Can we move on with the error
+
+expected error should be handled
+unexpected error shouldn't be handled
+
+AMI, SG, Key, instance type, storage
+
+authenticate before
+aws create instance key="" sg-id="" instance-type="t3.micro" --storage="20GB"
+
+aws configure -> authenticate with AWS
+aws s3 ls -> no o/p is okay, but error means credentials are wrong
+
+1. create ec2 instance
+2. update private ip in r53 record
+3. if frontend update public ip in frontend.daws86s.fun
+
+aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-07c8acf3fa6b923fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Instances[0].InstanceId' --output tex
+
+aws ec2 describe-instances --instance-ids i-0682bd1dbd92ce16c --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+
+aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-07c8acf3fa6b923fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text
+ami-09c813fb71547fc4f
+sg-07c8acf3fa6b923fa
+
+
+1. get the instance-id
+2. query the instance-id to get public ip
+
+11 instances
+I want to create instances dynamically
+
+1. created instance and took instance-id
+2. get private ip or public ip
+
+if instance == "frontend" take public ip else take private ip
+
+
+Existing Folder to Repo
+=======================
+git init -> intialise the folder as git repo
+
+
+aws route53 change-resource-record-sets \
+  --hosted-zone-id Z0948150OFPSYTNVYZOY \
+  --change-batch '
+  {
+    "Comment": "Updating record set"
+    ,"Changes": [{
+      "Action"              : "UPSERT"
+      ,"ResourceRecordSet"  : {
+        "Name"              : "'$RECORD_NAME'"
+        ,"Type"             : "A"
+        ,"TTL"              : 1
+        ,"ResourceRecords"  : [{
+            "Value"         : "'$IP'"
+        }]
+      }
+    }]
+  }
+  '

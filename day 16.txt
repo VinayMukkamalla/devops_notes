@@ -63,3 +63,47 @@ N="\e[0m"
 
 
 logs and logging @ 1:02 mins
+
+Logs
+==================
+/var/log/shellscript-logs/15-colors.log
+
+Redirections
+===================
+1 -> success
+2 -> failure
+& -> success/failure
+
+--------------------------------------------------
+if id -u is 0 then proceed
+otherwise stop
+
+if there is error in script, proceed or stop?
+
+mysql nginx mongodb-mongosh
+
+scripting/programming
+=====================
+1. keep less lines more performance
+2. readability
+3. DRY don't repeat yourself, try to reuse the code
+
+functions
+====================
+takes some inputs and gives some output
+
+1. call it
+2. provide inputs if required
+
+func_name(){
+
+}
+
+func_name
+
+Red - "\e[31m"
+
+SUCCESS - Green
+FAILURE - Red
+SKIP - Yellow
+
