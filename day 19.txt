@@ -1,0 +1,88 @@
+sed editor 
+
+idempotent
+
+worked on all shell scripts and launched application successfully
+
+
+@45 mins break 
+
+DRY --> Don't repeat yourself
+
+how can you call one script from another script
+---------------------------------------------------------------------------
+script1.sh
+
+NAME=INDIA
+echo "MY Country is : $NAME"
+
+echo "print script1 PID: $$"
+#sh 23-script2.sh
+
+
+output:
+MY Country is : INDIA
+print script1 PID: 3077
+-----------------------------------------------------------------
+23-srcipt2.sh
+
+sh 22-script1.sh
+
+echo "MY Country is : $NAME"
+
+echo "print script2 PID: $$"
+
+output:
+
+MY Country is : INDIA
+print script1 PID: 3082
+MY Country is :
+print script2 PID: 3081
+
+
+====================================
+
+after using source:
+
+source ./22-script1.sh
+
+echo "MY Country is : $NAME"
+
+echo "print script2 PID: $$"
+
+output:
+
+MY Country is : INDIA
+print script1 PID: 3159
+MY Country is : INDIA
+print script2 PID: 3159
+
+Note: if you source(source ./scriptname) then both scripts will run using same process
+
+--------------------------------------------------------------------
+
+source ./ --> Linux searches for any command you enter in the below paths
+and giving ./ after source command defines to take the file from currentpath
+
+echo $PATH
+/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+
+-------------------------------------------------------------------------------
+
+two ways of calling one script from another
+
+using sh <script name> -->
+
+runs in different process and cannot access environment of another script
+
+script 1 is not effected by script 2 failure 
+==========================================================
+using source or sourcing source <script name>: 
+
+ runs in same process and can access environment of another script
+
+script 2 is effected by script 1 failure and vice versa
+
+------------------------------------------------------
+
+platform engineering ante manam rasedhi malli malli vere vallu rayakunda use ayyelaaga cheyyadam
