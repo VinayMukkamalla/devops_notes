@@ -89,9 +89,9 @@ pull {
 		
 		node1 --> agent1(softwate checks configuration available CM server for every 30 mins)
 
-		node1 --> agent2()
+		node2 --> agent2()
 
-		node1 --> agent3()
+		node3 --> agent3()
 	}
 }
 
@@ -99,11 +99,62 @@ in every node there is an agent the agent software will go and check CM server i
 
 if anyone update the cofig incorrectly then it will be autocorrected automatically when agent communicates with CM server
 
+NOT SSH protocol; own protocol to pull (Agent s/w uses)
 
+need an extra software (Agent)
+
+Chef uses Ruby programming language
 ============================================================
-
+Ansible
 
 PUSH:
+
+PUSH {
+
+	CM Server:{  --> will have all configurations and pushes to nodes whenever we want respective nodes 
+		
+		node1 
+
+		node1
+		node1
+	}
+}
+
+Ansible command line tool
+
+install Ansible in Ansible server:
+ sudo dnf install Ansible -y
+
+ansible all -i Ip_address  --> -i means inventory, all means connect to all provided (servers)ip addresses,
+
+ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping  
+{-m is mode, ping is a command; Linux command == Ansile module/ collection}
+
+to install nginx using Ansible:
+===============================
+
+Linux: dnf install nginx -y
+(dnf is command)
+{install and nginx are arguments}
+
+
+ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps321 -b -m dnf -a "name=nginx state=installed"
+{-b(become sudo/root user) before -m(module) and -a{arguments starts "args passed inside quotes"} after dnf }
+
+
+start service:
+
+ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps321 -b -m service -a "name=nginx state=started"
+
+
+
+
+
+
+
+
+	
+
 
 
 
