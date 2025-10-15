@@ -1,0 +1,114 @@
+Disadvantages of shell scripting:
+=====================================
+
+1. NO error handling
+
+2.OS specific, homogenous
+
+3.Little complex to understand
+
+4. Not Idempotent by default
+
+5. complex to handle large number of servers
+
+connecting to remote server from shell server and running scripts using scp:
+============================================================================
+
+ssh ec2-user@ipaddress   and 
+password or ssh
+
+
+ssh ec2-user@ipaddress 'touch /tmp/shell.txt'
+--> connects remotely and creates a file shell.txt
+
+clone repo in current shell server
+
+use:  scp mongo.repo mongodb.sh ssh ec2-user@ip_address:/tmp/   --> will copy files to remote server securely(scp)
+
+ssh ec2-user@ip_address 'cd /tmp/ && sudo sh mongodb.sh'
+password
+
+-------------------------------------------------------------------
+
+configuration Management:
+==========================
+example -- plane laptop + os installation + date and time settings + creating folders + setting up network + create a default user + connect to wifi + install required software applications and packages
+{i.e, configuring the laptop}
+
+
+when we configure a sever : configuring / baselining the  server is making necessary changes to our servers and making it ready to host the application
+
+Install few system packages
+installing programming runtime {JDK, python, nodejs}
+creating /app folder
+creation default(system) user
+Downloading the application code in /tmp
+unzipping the app code in /app location
+installing dependencies
+creating systemctl service files
+starting the application
+
+
+
+Deployement: --> Downtime
+===================
+1. stop the application
+
+2. remove the old code
+
+3. download the new code
+
+4. install dependencies
+
+5. restart the application
+
+=============================================================
+Ansible tasks
+----------------
+
+Push VS Pull :
+
+PUSH -->Ansible is popular, it recently implemented pull also 
+
+PULL --> chef 
+
+pull --> we following up {{CMS Avanthi}}
+
+push --> event driven; when it is done it will be delivered {{CMS SATYA}}
+
+
+system 1 --> to --> system 2 (POP)
+
+system 1 --> to --> Broadcast --> to --> system 2   >> here systems are loosely coupled and  (event driven)<< will save time and efforts and serves the purpose more effectively 
+
+----------------------------------------------------------
+
+pull {
+
+	CM Server:{  --> will have all configurations of respective nodes 
+		
+		node1 --> agent1(softwate checks configuration available CM server for every 30 mins)
+
+		node1 --> agent2()
+
+		node1 --> agent3()
+	}
+}
+
+in every node there is an agent the agent software will go and check CM server if there is any update for every 30(an interval) mints.
+
+if anyone update the cofig incorrectly then it will be autocorrected automatically when agent communicates with CM server
+
+
+============================================================
+
+
+PUSH:
+
+
+
+
+
+
+
+
