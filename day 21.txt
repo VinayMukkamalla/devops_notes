@@ -1,0 +1,166 @@
+algo of backup files and removing old log files :
+
+1. check source_dir and dest_dir is given or not
+2. check whether they are exist or not
+3. then find the *.log file
+4. zip them and move to dest_dir
+5. if zipping is success then delete from source_dir
+
+low traffic days, low traffic hours --> maintenance of applications usually happens in these days
+
+12:00AM-06:00AM --> during these hours 
+
+crontab
+========
+A scheduler in Linux servers, we can schedule the scripts using crontab..
+
+scheduler like alarm 
+
+if we want to backup logs in 50  servers
+
+step 1: 
+Normally we have to clone the scripts {back up scripts 25th} in 50 servers
+
+step 2:
+we have to schedule crontab to run the script everyday at low traffic time 
+
+we can ignore step 1 by using scripts in AMI{we can keep the script in AMI} (some default packages can be installed using AMI {Terraform})
+
+convert Script to command:
+=============================
+
+all default command will be in /usr/bin dir if we place the script in /usr/bin dir then it will run as a command 
+
+scenario:
+
+you took some sample server, you developed script. tested it working fine. then you installed this as crontab in all the servers
+
+script failed in PROD, because zip command was not installed. so I made it avaialbe in the script again..
+--------------------------
+sudo cp 25-backup.sh /usr/bin/backup
+sudo chmod u+x /usr/bin/backup
+
+now we can use backup as command to schedule backup script in crontab
+
+crontab -e
+
+0 2 * * * sudo backup source_dir dest_dir -->to run script everyday at 2 am midnight
+
+
+=====================================================================
+
+Monitoring: @29 mins
+
+how can you check Disk utilization
+
+HD, RAM, CPU
+
+if any one of the above gets full then it will impact system performance and it may cause business loss
+
+Hard disk:
+-------------
+df -h 
+Filesystem                    Size  Used Avail Use% Mounted on
+devtmpfs                      4.0M     0  4.0M   0% /dev
+tmpfs                         355M     0  355M   0% /dev/shm
+tmpfs                         142M  2.4M  140M   2% /run
+/dev/mapper/RootVG-rootVol    6.0G  1.8G  4.2G  30% /
+/dev/mapper/RootVG-homeVol    960M   40M  921M   5% /home
+/dev/mapper/RootVG-varVol     2.0G  468M  1.5G  24% /var
+/dev/mapper/RootVG-logVol     2.0G   66M  1.9G   4% /var/log
+/dev/mapper/RootVG-varTmpVol  2.0G   47M  1.9G   3% /var/tmp
+/dev/nvme0n1p3                424M  223M  202M  53% /boot
+/dev/nvme0n1p2                122M  7.0M  115M   6% /boot/efi
+/dev/mapper/RootVG-auditVol   4.4G   64M  4.3G   2% /var/log/audit
+tmpfs                          71M     0   71M   0% /run/user/1001
+
+
+df -hT
+
+Filesystem                   Type      Size  Used Avail Use% Mounted on
+devtmpfs                     devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs                        tmpfs     355M     0  355M   0% /dev/shm
+tmpfs                        tmpfs     142M  2.4M  140M   2% /run
+/dev/mapper/RootVG-rootVol   xfs       6.0G  1.8G  4.2G  30% /
+/dev/mapper/RootVG-homeVol   xfs       960M   40M  921M   5% /home
+/dev/mapper/RootVG-varVol    xfs       2.0G  468M  1.5G  24% /var
+/dev/mapper/RootVG-logVol    xfs       2.0G   66M  1.9G   4% /var/log
+/dev/mapper/RootVG-varTmpVol xfs       2.0G   47M  1.9G   3% /var/tmp
+/dev/nvme0n1p3               xfs       424M  223M  202M  53% /boot
+/dev/nvme0n1p2               vfat      122M  7.0M  115M   6% /boot/efi
+/dev/mapper/RootVG-auditVol  xfs       4.4G   64M  4.3G   2% /var/log/audit
+tmpfs                        tmpfs      71M     0   71M   0% /run/user/1001
+
+
+RAM:
+
+--> free
+
+               total        used        free      shared  buff/cache   available
+Mem:          726560      244580      210876         280      368896      481980
+Swap:        2097148       27904     2069244
+
+
+CPU: 
+----
+
+--> top
+99.8 id --> idea cpu so ultilization is 100 - 99.8 (0.2)
+
+%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :    709.5 total,    205.6 free,    238.9 used,    360.7 buff/cache
+MiB Swap:   2048.0 total,   2020.7 free,     27.2 used.    470.7 avail Mem
+
+=====================================================================================================
+
+we will monitor CPU, RAM & HD utilization and also trigger alerts automatically using shell scripting:
+
+ouvu uyqq ddpd aef
+
+ouvuuyqqddpdaef
+
+
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-bundle.crt
+logfile        /var/log/msmtp.log
+
+account        gmail
+host           smtp.gmail.com
+port           587
+from           vinaygoudmukkamalla@gmail.com
+user           vinaygoudmukkamalla@gmail.com
+password       ouvuuyqqddpdaef
+
+account default : gmail
+
+
+
+sudo chmod 644 /etc/msmtprc
+sudo touch /var/log/msmtp.log
+sudo chmod 666 /var/log/msmtp.log
+
+
+{
+echo "To: vinay.mukkamalla@gmail.com"
+echo "Subject: mail from Vinaygoudmukkamalla through Linux msmtp server"
+echo "Content-Type: text/html"
+echo ""
+echo "This mail is just for testing server to gmail"
+} | msmtp "vinay.mukkamalla@gmail.com"
+
+
+=================================================================================================================
+
+shell disadvantages:
+
+1. homogeneous scripting {different for different os Linux flavours centos, RHEl etc}
+
+2. error handling is tough { no default libraries and error handling we have to write explicitly}
+
+3. very tough to handle large number of servers { we should login to each server and then run the scripts but cannot run scripts in a different server from a different sever (remotely connect and running scripts is not possible)}
+
+4. script is complex to understand (say 150 lines of code not easy to comprehend) everything should be written from scratch.
+
+

@@ -86,3 +86,19 @@ script 2 is effected by script 1 failure and vice versa
 ------------------------------------------------------
 
 platform engineering ante manam rasedhi malli malli vere vallu rayakunda use ayyelaaga cheyyadam
+
+
+------------------------------------------
+
+used source ./common.sh
+
+functions
+
+app_restart(){
+
+
+}
+
+automated using 
+
+shell-common-roboshop repository

@@ -1,0 +1,76 @@
+shell scripting completed automation of roboshop app deployement @35 mins
+
+
+log management
+
+deleting
+archiving
+
+delete old logs
+
+our app generates logs everyday round the clock
+
+so deleting/archiving managing log files automatically is a must to manage server storage 
+
+if server gets filled with log files it will have performance issues
+
+touch -d 250801 app.log
+
+
+find . -name "*.log" -mtime +14
+
+find / -name "*.log" -type f -mtime +14 -size +409c
+
+find / -name "*.log" -type f -mtime +14 -size +4k
+
+
+
+to find disk usage of a particular directory or file
+
+du -sh /var/log/cloud-init.log
+
+
+
+delete log files from the directory which are older than 14 days:
+
+sequence of steps to explain
+
+first will check if source directory exist or not
+find the files to delete in source source directory
+will log the files that are going to be deleted
+will delete the files 
+
+while [condition] IFS= read -r filepath
+do
+	executing commands to delete
+	
+done <<<$variable | <file (giving input)
+
+
+sequence of steps to explain
+
+1.first will check if source directory exist or not
+2.find the files to delete in source source directory
+3.will log the files that are going to be deleted
+4.will delete the files 
+
+
+backup files:
+==================
+
+source dir
+
+destination dir
+
+find the files older than 14 days
+
+zip the files 
+
+move zipped files to destination directory
+
+then we can delete from source directory
+
+some team will pick the files from destination dirs and keep them in storage servers
+
+
+we have to do the above steps daily
