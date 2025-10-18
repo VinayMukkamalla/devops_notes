@@ -128,7 +128,7 @@ install Ansible in Ansible server:
 ansible all -i Ip_address  --> -i means inventory, all means connect to all provided (servers)ip addresses,
 
 ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping  
-{-m is mode, ping is a command; Linux command == Ansile module/ collection}
+{-m is module, ping is a command; Linux command == Ansile module/ collection}
 
 to install nginx using Ansible:
 ===============================
@@ -145,6 +145,14 @@ ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps32
 start service:
 
 ansible all -i Ip_address, -e ansible_user=ec2-user -e ansible_password=DevOps321 -b -m service -a "name=nginx state=started"
+
+============================================================
+
+XML  --> like html tags
+JSON --> {"a" : "b", }
+YAML --> - name: "vinay"  (- hyphen determines list)
+	   age: "27"
+
 
 
 
