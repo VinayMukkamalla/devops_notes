@@ -1,0 +1,30 @@
+    1  22/10/25 09:23:22 git clone https://github.com/VinayMukkamalla/shell_roboshop.git
+    2  22/10/25 09:23:36 aws configure
+    3  22/10/25 09:24:55 cd shell_roboshop/
+    4  22/10/25 09:25:09 sudo sh Roboshop.sh node
+    5  22/10/25 09:25:33 sudo sh Roboshop.sh Node
+    6  22/10/25 09:26:07 sudo sh Roboshop.sh Nodeserver
+    7  22/10/25 09:26:18 sh Roboshop.sh
+    8  22/10/25 09:26:29 sh Roboshop.sh Nodeserver
+    9  22/10/25 09:34:07 cd ..
+   10  22/10/25 09:34:09 ls
+   11  22/10/25 09:34:22 git clone https://github.com/VinayMukkamalla/ansible.git
+   12  22/10/25 09:34:25 ls
+   13  22/10/25 09:34:28 cd ansible/
+   14  22/10/25 09:34:31 ls
+   15  22/10/25 09:36:32 sudo dnf install ansible -y
+   16  22/10/25 09:44:33 clear
+   17  22/10/25 09:46:00 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 03-multi-play.yaml
+   18  22/10/25 09:57:09 git pull
+   19  22/10/25 09:57:13 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 03-multi-play.yaml
+   20  22/10/25 09:57:45 git pull
+   21  22/10/25 09:57:49 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 03-multi-play.yaml
+   22  22/10/25 10:07:06 ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping
+   23  22/10/25 10:08:27 ansible -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping
+   24  22/10/25 10:08:48 ansible all -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ping
+   25  22/10/25 10:10:05 ansible all -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m "touch /home/ec2-user/ansible-folder/"
+   26  22/10/25 10:10:35 ansible all -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m touch -a "/home/ec2-user/ansible-folder/"
+   27  22/10/25 10:11:50 ansible all -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m touch -a "/home/ec2-user/ansible.txt"
+   28  22/10/25 10:15:46 ansible all -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -m ansible.builtin.file -a "path=/home/ec2-user/ansible_folder state=directory mode=0755"
+   29  22/10/25 10:18:15 clear
+   30  22/10/25 10:18:20 history
