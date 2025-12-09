@@ -1,0 +1,370 @@
+docker commands:
+
+docker build -t filename.yaml
+
+docker image 
+
+docker images ls
+
+docker run
+
+===================================================
+
+java springboot 
+
+microservices --> inbuilt servers(component) --> enable port 8080(use case functionality)
+
+reduced size --> deployed on containers
+
+yaml file --> image --> container
+
+
+---------------------------
+bare metal servers (open plot and building own house)
+
+server properties:
+
+hardware = cpu ram storage
+os = Linux
+
+app server = tomcat, nodejs java 
+
+application = appcode + libraries(dependencies) + runtime 
+
+===============================
+
+Virtualization: taking a flat inside an apartment
+
+hardware 
+host OS  --> exsi , VMware 
+hypervisor --> logical partitions, and isolated environments 
+guest os --> different logical computers, from one of the partition, 
+web server --> 
+app code + dependencies + runtime
+
+Advantages
+less boot time 
+space utilization 
+
+-----------------------------
+containerization
+containers  {no need of app servers runs on virtual machine inside a container using least required resources and packages}
+
+hardware
+host os
+#hypervisor
+#virtual machine  --> partitioned isolated space with it's resource allocations and different os configurations
+container engine
+bare min os
+packages + app server + application
+container  --> container is a running instance of an image and the image has everything including runtime app code dependencies 
+
+
+======================================
+
+to run containers inside a virtual machine we need a container engine 
+
+
+------------------------------------------------------------------------
+================================
+Docker Installation
+================================
+docker == container engine
+
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+sudo systemctl start docker
+sudo sysytemctl enable docker
+
+sudo docker ps
+
+sudo usermod -aG docker ec2-user
+
+exit and login again
+==============================================================================
+------------------------------------------------------------------------------
+
+
+#sudo systemctl enable --now docker
+#sudo docker run hello-world
+
+
+docker ps -> displays all running containers
+
+
+images
+
+AMI = OS + system packages + APP code + APP libraries + APP runtime   --> (AMAZON MACHINE IMAGE)
+
+
+AMI == container image == docker image
+
+container os == bare minimum os  very lightweight only required os + properties to run the application
+
+
+embedded os == bare minimum OS --> very lightweight {10mb} --> only helps for basic operations  --> number of functional instructions very less
+
+Docker Image = bare minimum os + + system packages + APP code + APP libraries + APP runtime 
+
+advantage educed Os size
+
+run and image we get a container
+
+run Os we get server 
+
+=============================================
+
+to run a container we need the image
+
+docker pull nginx --> pulls nginx from docker registry (docker hub)
+
+server is running version of OS
+
+vinaydocker25
+Dockship@2026
+
+
+docker pull nginx:version
+
+docker create imageid or name
+
+docker pull + docker create imageID + docker start container ID  == docker run imagenm:version (docker pull+create + start)
+
+docker rm containerID
+
+docker rmi imageID
+
+docker image ls
+
+IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
+nginx:latest   e21f8d0566ad        225MB         62.6MB
+
+docker images  /  docker image ls
+IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
+nginx:latest   e21f8d0566ad        225MB         62.6MB
+
+docker rm -f containerID  --> to remove running container
+
+docker rmi imageID --> to remove image from local 
+
+-------------------------------------------------
+ sudo growpart /dev/nvme0n1 4
+
+ sudo lvextend -L +30G /dev/mapper/RootVG-homeVol
+ sudo xfs_growfs /home
+ sudo lvreduce -L 3G /dev/mapper/RootVG-homeVol
+  df -hT  /var
+ sudo lvextend -L +28G /dev/mapper/RootVG-varVol
+ lsblk
+ sudo xfs_growfs /var
+-------------------------------------------------
+
+/var/lib/docker  -> docker home repo
+======================================
+
+docker local
+
+docker central == registry or hub
+
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ec2-user
+exit
+
+
+docker engine installed on a server
+
+with docker image
+  we create and start docker container
+     connect to the container(which is also a server)
+	a container or server  has 65535 ports
+	 
+
+user --> (Linux server[host] --> container)
+    connect using ports 
+		80:80
+
+allocate ports:
+				 (our-wish)
+		docker run -d -p <host-port>:<container-port> container imageid
+				80	    :  80
+			     (-p port forwarding) whatever request received by host on port 80 is forwarded to container port 80
+
+		http://44.200.141.181  --> request goes to port no 80
+
+		hostports cannot be reused they will be blocked
+
+
+	user ---->      protocol://ipaddress:portnumber(host) ---->    host port forwarded to container port and accessible
+			host port must be unique for all containers
+
+
+
+
+  to interact or connect to container it should be running
+	
+	we can connect using command :   docker exec -it containerID  bash
+
+
+docker inspect containerid 
+
+docker inspect imageID
+
+==========================================================================================================================
+                                                            Dockerfile
+==========================================================================================================================
+
+
+Dockerfile --> instructions to build custom images
+
+FROM
+	refers to Base OS of the image 
+
+RUN
+	configuring the image like installing packages creating users 
+CMD
+	wrappers like systemctl won't work in containers so we use actual container commands inside containers executable format  				CMD ["nginx", "-g", "daemon off;"]   ==>  systemctl start nginx
+
+ENTRYPOINT
+	
+
+	
+WORKDIR
+	
+
+executable format vs shell format
+
+
+#alt + shift +T  --> capture
+-----------------------------------------------------------
+							usage flow
+
+
+vs code {Dockerfile} -->  push to GitHub -->   pull to docker engine installed sever  --> docker build (file to image) then run the image -->  port binding -->   docker exec -it conid bash
+
+building the image from Dockerfile
+
+		docker build -t <image-name>:version .
+						    (. --> current directory)
+
+		===============================================
+			push image to Docker hub our custom acc
+		================================================
+
+
+		docker push <URL>/<username>/<image-name>:<version>
+
+		<URl>  --> docker.io (default; if we don't mention also it will be docker.io)
+
+			<username>  VinayDocker25 (my account)
+
+			<image name> in our case from
+
+
+	--> to push image to docker registry
+
+we need to login first
+
+ >> docker login -u <username>
+
+
+ >>password
+
+
+
+		>>>>>> push  <<<<<<
+
+docker push docker.io/vinaydocker25/from:latest
+
+     << tag >>
+		retagging 
+					
+					    (image-nm:ver)	(username/image-nm:ver)
+			>>>>>>>> docker tag from:latest   vinaydocker25/from:latest
+
+
+
+
+
+
+===================================================================================================================================
+				remove all containers 
+============================================================================================================================
+
+docker ps -a -q    -->  ``
+
+
+
+docker rm -f `docker ps -a -q`
+
+
+
+IMAGES:
+
+docker images -a -q
+
+docker rmi `docker images -a -q`
+
+===============================================================================================================================
+
+
+FROM -->  base OS   --> we can also refer images(official and custom ) from local or repo if image is official then it will work (if image is custom repo follow syntax docker.io/vinaydocker25/image:version)
+
+RUN --> instruction is used to configure the image. like installing the packages, configurations, creating user  etc
+
+	docker build -t run:v1 . 
+	
+	>>>>>>>>>>>RUN instruction runs while image building
+	>>>>>>>> Image can have multiple RUN instructions <<<<<<
+
+	docker build --no-cache --progress=plain -t run:v1  .  (to see all output without hiding)
+
+
+CMD  -->  inside a server services should run for infinite time or continuously in order to access them 
+		so instruction inside CMD ["nginx", "-g", "daemon off;"] should run continuously inside the container
+		command should run in foregrund inside the container and then we should take the process to background
+
+	>>>>> CMD instructions runs at container start time
+	>>>>> Image can have only one CMD instruction to make the container up
+	>>>>> if we give multiple CMD's in image then last CMD instruction will be considered
+
+	{ may be all services will be off and only one service will run per container or one process}
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
